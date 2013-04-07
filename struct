@@ -1,0 +1,42 @@
+## Possibly size of varchar fields must be reduced: mysql doesn't allow
+## primary key to be more than 250 characters
+
+## `suspended' is duplicated in subs for selection speed.
+## This is violation of 1NF but we haven't time to delay in feeder.
+## subs.suspended := users.suspended || domain.suspended in code
+## which modifies subscription lists (cmd.pl)
+subs:
+email varchar(63) not null,
+domain varchar(63) not null,
+groupname varchar(63) not null,
+smode varchar(10),
+rsize integer,
+suspended bool,
+primary key(email,groupname);
+
+users:
+email varchar(63) not null,
+domain varchar(63) not null,
+lang varchar(10) not null,
+lhelp bool,
+newgrp bool,
+suspended bool,
+primary key(email);
+
+list:
+email varchar(63) not null,
+groupname varchar(63) not null,
+artnum integer not null,
+tag integer(1),
+size integer(11),
+sender varchar(255),
+subject varchar(255),
+primary key(email,groupname,artnum)
+;
+
+domains:
+domain varchar(63) not null primary key,
+suspended bool;
+
+newsgroups:
+groupname varchar(63) not null primary key
