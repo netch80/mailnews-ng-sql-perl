@@ -314,7 +314,7 @@ Unconnected:
 
   ## Reload servers hash if it is empty
   $server_tries = 0 if( !%smtp_hp_try );
-  if( !%smtp_hp_try && defined @mn_config::cf_smtp_servers ) {
+  if( !%smtp_hp_try && @mn_config::cf_smtp_servers ) {
     for $hp ( @mn_config::cf_smtp_servers ) {
       $smtp_hp_try{$hp} = 1;
       ++$server_tries;

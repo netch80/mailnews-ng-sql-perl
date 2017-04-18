@@ -150,7 +150,7 @@ sub main {
   $localpart = $tmpa[0];
   $addr_domain = lc $tmpa[1];
   $addr = $localpart . '@' . $addr_domain;
-  if( defined @mn_config::bad_localparts ) {
+  if( @mn_config::bad_localparts ) {
     foreach $tmps( @mn_config::bad_localparts ) {
       if( lc $localpart eq lc $tmps ) {
         syslog( 'notice', 'address has prohibited local part: %s', $addr );
@@ -163,7 +163,7 @@ sub main {
   ## XXX Now temporary workaround with explicit list. For future release,
   ## more flexible mechanism should be used.
   $flag_ouruser = 0;
-  if( defined @mn_config::our_explicit_domains ) {
+  if( @mn_config::our_explicit_domains ) {
     foreach $tmps ( @mn_config::our_explicit_domains ) {
       if( $tmps eq $addr_domain ) { $flag_ouruser = 1; last; }
     }
