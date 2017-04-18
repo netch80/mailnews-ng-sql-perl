@@ -113,7 +113,7 @@ sub convert_cp {
   $cp_from = lc $cp_from;
   $cp_to = lc $cp_to;
   return (0,$itext) if( $cp_from eq $cp_to );
-  return (0,$itext) if( 
+  return (0,$itext) if(
       ( $cp_from eq 'koi8-r' || $cp_from eq 'koi8-u' ) &&
       ( $cp_to eq 'koi8-r' || $cp_to eq 'koi8-u' ) );
   #-$flag_strict = $phash->{'strict'} or 0;

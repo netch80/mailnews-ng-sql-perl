@@ -40,7 +40,7 @@ my $uopt_suspended;     ## option for current user: whether suspended
 my $uopt_lhelp;         ## option for current user: whether lhelp is on
 my $uopt_newgrp;        ## option for current user: send new groups or not
 my $dopt_disabled;     ## whether whole domain is disabled (admin option)
-my $lang; 
+my $lang;
 my $charset;
 my $mylocalpart;
 my $myhdrfrom;
@@ -131,7 +131,7 @@ sub main {
     syslog( 'notice', 'message without return address, drop it' );
     exit( 0 );
   }
-  
+
   ## Convert address to canonical form. Requires rfc822 magic and perversions.
   ## Now use simplest rfc1036 case.
   $addr = &mn_subs::mn_strip_address( $addr );
@@ -158,7 +158,7 @@ sub main {
       }
     }
   }
-  
+
   ## Check address for valid and belong to our users
   ## XXX Now temporary workaround with explicit list. For future release,
   ## more flexible mechanism should be used.
@@ -168,7 +168,7 @@ sub main {
       if( $tmps eq $addr_domain ) { $flag_ouruser = 1; last; }
     }
   }
-  
+
   ## For message with newgroups, inject it to news system
   if( $f_groups ) {
     unless( $flag_ouruser ) {
@@ -179,7 +179,7 @@ sub main {
     ## NOTREACHED
     exit(1);
   }
-  
+
   ## No newsgroup. Treat as command
   &mn_intl::set_intl( {
       lang => $lang,
@@ -221,7 +221,7 @@ sub main {
     print SM i('You are not our user. Functions are partially unavailable'),
         "\n";
   }
-  
+
   $dbh = &dbhandle();
   die unless $dbh;
   ## Get options from database
@@ -424,14 +424,14 @@ sub main {
       print SM i('Command succeeded'),"\n";
     }
   }
-  
+
   unless( $ncmd ) {
     print SM i('No command was recognized.'),"\n\n";
     &print_help() if $flag_ouruser;
     close( SM );
     exit( 0 );
   }
-  
+
   print SM "\n", sprintf( i('%d command(s) recognized'), $ncmd ), "\n";
   close SM;
   exit( 0 );
@@ -639,7 +639,7 @@ use vars qw(
 sub do_index {
   my( $argline, $currgroup, $src_nline, $src_msgid ) = @_;
   my( $ts, $tmp, $i, $reply, $ts_art, $k, $l0, $l,
-      $timespec, $timestart, 
+      $timespec, $timestart,
       $group, $n, $g_first, $g_last,
       $ff_from, $ff_subject, $ff_date, $artsize );
   my( @args, @grouppats, @groups, @xover_format_flat, @xo_group, @xo_art,
@@ -758,7 +758,7 @@ sub do_index {
           if( $k =~ /^Subject:\s*/i ) { $ff_subject = $'; }
           if( $k =~ /^From:\s*/ ) { $ff_from = $'; }
           if( $k =~ /^Date:\s*/ ) { $ff_date = $'; }
-          $k = ''; 
+          $k = '';
         }
         last if $l eq '';
         $k .= $l;

@@ -42,7 +42,7 @@ sub main {
   my %users;
 
   setlogsock('unix');
-  
+
   ## Get lock. If we can't get lock, exit immediately
   #- print STDERR "Try to open: $mn_config::cf_lister_lock_path\n";
   open( LOCK, ">>$mn_config::cf_lister_lock_path" ) ||
@@ -51,17 +51,17 @@ sub main {
     syslog( 'notice', 'Another lock is in action' );
     exit(0);
   }
-  
+
   $dbh = &dbhandle();
   die unless $dbh;
-  
+
   ## Tag all current data with our tag.
   ## All records added by feeder will have tag 0.
   ## We work only with records retagged by lister. Together with lock for
   ## lister, this keeps constant set of records during all this work.
   $rc = $dbh->do( 'UPDATE list SET tag=1' );
   die unless $rc;
-  
+
   ## Select users
   $sth = $dbh->prepare( 'SELECT DISTINCT email FROM list WHERE tag=1' );
   die $dbh->errstr unless $sth;
@@ -74,7 +74,7 @@ sub main {
     $users{$user} = 1;
   }
   #- $sth->finish();
-  
+
   ## Iterate users
   $sth = $dbh->prepare(
       'SELECT groupname,artnum,size,sender,subject FROM list ' .
@@ -139,7 +139,7 @@ sub main {
   }
   $sth->finish();
   $sth2->finish();
-  
+
   $dbh->disconnect();
   exit(0);
 

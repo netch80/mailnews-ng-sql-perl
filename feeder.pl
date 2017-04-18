@@ -64,16 +64,16 @@ sub main {
 
   my( $l, $stream_msgid );
 
-  
+
   $dbh = "";
   #$smtp = "";
   #$smtp_nsend = 0;
-  
+
   $| = 1;
-  
+
   print "200 ok\r\n";
   syslog 'info', 'started';
-  
+
   for(;;) {
     $l = <STDIN>;
     unless( defined $l ) {
@@ -741,7 +741,7 @@ sub find_users {
     } ## iterate select reply lines
     #$cache_feed{$group} = $an_feed;
     #$cache_list{$group} = $an_list;
-    #$cache_expire{$group} = $currtime + 600; 
+    #$cache_expire{$group} = $currtime + 600;
     %cache_expire = ();
   } ## iterate groups
   #- $sth->finish();

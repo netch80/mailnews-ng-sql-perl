@@ -40,7 +40,7 @@ sub main {
   my( $q, $oldgroup, $email, $group );
 
   setlogsock('unix');
-  
+
   ## Get lock. If we can't get lock, exit immediately
   #- print STDERR "Try to open: $mn_config::cf_lister_lock_path\n";
   open( LOCK, ">>$mn_config::cf_newgrp_lock_path" ) ||
@@ -49,7 +49,7 @@ sub main {
     syslog( 'notice', 'Another lock is in action' );
     exit(0);
   }
-  
+
   $dbh = &dbhandle();
   die 'cannot connect to database!' unless $dbh;
 
@@ -115,7 +115,7 @@ sub main {
     $rc = $sth->execute( $group );
     die unless $rc;
   }
-  
+
   $dbh->disconnect();
   exit(0);
 
